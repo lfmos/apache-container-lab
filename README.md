@@ -1,57 +1,37 @@
-# Docker Apache Deployment
+# Apache Container Lab
 
-Aplicação web estática executada em um container Apache e gerenciada com Docker Compose.
+Laboratório prático de containerização de uma aplicação web estática com **Apache HTTP Server**, **Docker** e **Docker Compose**.
+
+O projeto utiliza uma imagem própria construída a partir do Apache oficial, mantendo a aplicação separada da configuração de infraestrutura e incluindo validação de saúde do container.
 
 ## Objetivo
 
-Demonstrar conhecimentos em Docker, Docker Compose, Apache HTTP Server, mapeamento de portas e bind mounts por meio de um projeto visual de portfólio.
+Demonstrar fundamentos de:
 
-## Estrutura
+- criação de imagens com Dockerfile;
+- Apache HTTP Server em container;
+- Docker Compose;
+- mapeamento de portas;
+- healthchecks;
+- separação entre aplicação e infraestrutura;
+- validação de build e runtime.
 
-```text
-docker-apache-deployment/
-├── website/
-│   ├── assets/
-│   │   ├── fonts/
-│   │   ├── icons/
-│   │   └── images/
-│   ├── css/
-│   │   ├── animations.css
-│   │   ├── components.css
-│   │   ├── layout.css
-│   │   ├── reset.css
-│   │   ├── responsive.css
-│   │   ├── sections.css
-│   │   ├── style.css
-│   │   └── variables.css
-│   ├── js/
-│   │   └── script.js
-│   └── index.html
-├── docker-compose.yml
-├── .gitattributes
-├── .gitignore
-├── LICENSE
-└── README.md
-```
-
-## Executar
-
-```bash
-docker compose up -d
-```
-
-Abra:
+## Arquitetura
 
 ```text
+app/
+  │
+  ▼
+Dockerfile
+  │
+  ▼
+Apache HTTP Server
+  │
+  ▼
+Docker Image
+  │
+  ▼
+Docker Compose
+  │
+  ▼
 http://localhost:8080
-```
-
-Para encerrar:
-
-```bash
-docker compose down
-```
-
-## Autor
-
-Luís Filipe Medeiros — [GitHub](https://github.com/lfmos)

@@ -1,11 +1,18 @@
 services:
   apache:
-    image: httpd:2.4
-    container_name: docker-apache-web
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: apache-container-lab
     restart: unless-stopped
 
     ports:
       - "8080:80"
 
-    volumes:
-      - ./:/usr/local/apache2/htdocs:ro
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O - http://127.0.0.1/ | grep -q 'Apache Container Lab'"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 5s

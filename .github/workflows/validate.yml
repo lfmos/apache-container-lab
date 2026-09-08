@@ -1,0 +1,55 @@
+name: Project Validation
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Validate Docker Compose
+        run: docker compose config --quiet
+
+      - name: Build container image
+        run: docker compose build --pull
+
+      - name: Start container
+        run: docker compose up -d
+
+      - name: Wait for healthy container
+        run: |
+          for attempt in {1..20}; do
+            status="$(docker inspect --format='{{.State.Health.Status}}' apache-container-lab 2>/dev/null || true)"
+
+            if [ "$status" = "healthy" ]; then
+              echo "Container is healthy."
+              exit 0
+            fi
+
+            sleep 2
+          done
+
+          echo "Container did not become healthy."
+          docker compose logs
+          exit 1
+
+      - name: Validate Apache response
+        run: |
+          curl --fail --silent http://127.0.0.1:8080/ \
+            | grep --quiet "Apache Container Lab"
+
+      - name: Show container status
+        if: always()
+        run: docker compose ps
+
+      - name: Cleanup
+        if: always()
+        run: docker compose down --volumes
