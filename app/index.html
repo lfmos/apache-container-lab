@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apache Container Lab</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 2rem;
+      font-family: Arial, sans-serif;
+      background: #111827;
+      color: #f9fafb;
+    }
+
+    main {
+      width: min(680px, 100%);
+      padding: 2.5rem;
+      border: 1px solid #374151;
+      border-radius: 12px;
+      background: #1f2937;
+    }
+
+    h1 {
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      line-height: 1.6;
+      color: #d1d5db;
+    }
+
+    code {
+      color: #93c5fd;
+    }
+
+    .status {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: .5rem .8rem;
+      border: 1px solid #4b5563;
+      border-radius: 6px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <h1>Apache Container Lab</h1>
+
+    <p>
+      Static application served by Apache HTTP Server
+      inside a Docker container.
+    </p>
+
+    <p>
+      This environment demonstrates container image creation,
+      Docker Compose orchestration and basic runtime validation.
+    </p>
+
+    <div class="status">
+      Apache status: running
+    </div>
+  </main>
+</body>
+</html>
